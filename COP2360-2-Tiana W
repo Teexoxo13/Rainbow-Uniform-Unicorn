@@ -1,0 +1,56 @@
+public class Contractor {
+    private String name;
+    private String number;
+    private String startDate;
+
+    public Contractor(String name, String number, String startDate) {
+        this.name = name;
+        this.number = number;
+        this.startDate = startDate;
+    }
+
+    // Accessors
+    public String getName() { return name; }
+    public String getNumber() { return number; }
+    public String getStartDate() { return startDate; }
+
+    // Mutators
+    public void setName(String name) { this.name = name; }
+    public void setNumber(String number) { this.number = number; }
+    public void setStartDate(String startDate) { this.startDate = startDate; }
+}
+
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        ArrayList<Uniform> subcontractors = new ArrayList<>();
+        
+        while (true) {
+            System.out.println("Enter details for Subcontractor Unicorn (or type 'exit' to finish):");
+            System.out.print("Name [Example: Rainbow]: ");
+            String name = input.nextLine();
+            if (name.equalsIgnoreCase("exit")) break;
+
+            System.out.print("Number [Example: 113]: ");
+            String number = input.nextLine();
+            
+            System.out.print("Start Date: ");
+            String date = input.nextLine();
+            
+            System.out.print("Shift (1=Day, 2=Night): ");
+            int shift = Integer.parseInt(input.nextLine());
+
+            subcontractors.add(new Uniform(name, number, date, shift));
+        }
+
+        System.out.println("\n--- Payroll Summary ---");
+        for (Uniform u : subcontractors) {
+            System.out.printf("Contractor: %s (#%s) | Pay: $%.2f\n", 
+                u.getName(), u.getNumber(), u.computePay(40));
+        }
+    }
+}
